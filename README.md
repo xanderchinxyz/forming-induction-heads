@@ -24,18 +24,26 @@ Fixed variables:
 ### Rough Findings:
 - 1L and 2L fixed models unsurprisingly seem to have memorized the sequence length of 20, as both show fixed induction heads diagonals with intervals of 20, no matter what the sequence length is, and hence the induction accuracy (accuracy of the model after one repeated sequence) of sequences of other lengths is 0%
 - The 2L fixed model seems to have developed an almost "artificial" looking blur in the heads of layer 0 after the 20th token position
-- Gemini mentioned that this blur could be due to the formation of a previous token head, where layer 0 acts as a helper to move information around so that layer 1 can perform the match
+- I asked Gemini about this and it mentioned that this blur could be due to the formation of a previous token head, where layer 0 acts as a helper to move information around so that layer 1 can perform the match
+<p align="center">
+  <img src="./assets/1L_fixed.jpg" width="45%" />
+  <img src="./assets/2L_fixed.jpg" width="45%" />
+</p>
 
 - 1L varied couldn't form induction heads since information or tokens can't "mix" using only one layer
 - Interestingly, a blurred distribution across the 20-29 token range was formed on the attention heads in 1L varied
 - Gemini believes this blurred distribution is the model's attempt to attend to the general area where the repeat is likely to be. So it's plausible that the model forms a somewhat uniform probability distribution of the tokens in the sequence, and by pure statistical chance, it can choose the correct token, leading to a low but non-zero induction accuracy
+<img src="./assets/1L_varied.jpg" width="90%"/>
 
 - 2L varied formed induction heads in the layer 1 attention heads characterised by the off diagonals at intervals of the sequence length!
 - 2L varied also formed attention heads that look at the current token and previous token in layer 0
 - 2L varied seems to generalize to out-of-distribution sequence lengths quite well at 20000 epochs, although not perfectly. Also, repeating tokens in a sequence sometimes confuses the 2L varied model, also trained at 20000 epochs. I believe the confusion is due to the split attention between the next token after the repeated one, hence the model can't decide which token is the correct one
+<img src="./assets/2L_varied_20000.jpg" width="90%"/>
 
 - I trained the 2L varied model for another 40000 epochs for a total of 60000 epochs to see the behavior of the model on OOD sequence lengths and sequences with repeated tokens. The result is that the accuracy of OOD sequence lengths falls off afterwards, with a steeper fall off for greater sequence lengths. Perhaps the model is memorizing?
-- Repeating tokens in a sequence doesn't confuse the 2L varied model trained for 60000 epochs if the sequence length is in the distribution of 20 to 30. I think this gives further proof that the model is memorizing
+- Repeating tokens in a sequence doesn't confuse the 2L varied model trained for 60000 epochs if the sequence length is in the distribution of 20 to 30. Not sure if the model actually learned to avoid repeating sequences for sequence lengths of 20 to 29 tokens, or if it just memorized, since induction accuracy falls off for sequences of 30+ tokens
+<img src="./assets/2L_varied_60000.jpg" width="90%">
+
 - Interestingly, the attention head L0H2 seems to transition from an attention head that looks at the previous token (a nice, clear long diagonal offset by one) to an attention head that looks like pure noise, similar to the attention heads when they were first initialized after 20000 epochs. OOD induction accuracy also starts to drop when these attention heads start fading into noise. Perhaps this head could be related to the model memorizing!
 
 ### Conclusion:
