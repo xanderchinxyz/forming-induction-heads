@@ -376,7 +376,7 @@ def interactive_attention_viewer(
 
             <div class="cv-right-{viewer_id}">
                 <div class="cv-section-title-{viewer_id}">
-                    Head selector <span class="cv-section-subtitle-{viewer_id}">(hover to focus, click to lock)</span>
+                    Head Selector Preview<span class="cv-section-subtitle-{viewer_id}">(hover to focus, click to lock)</span>
                 </div>
                 <div id="cv-head-selector-{viewer_id}" class="cv-head-selector-{viewer_id}"></div>
             </div>
@@ -466,7 +466,7 @@ def interactive_attention_viewer(
                 if (headName === currentHead) thumb.classList.add('active');
                 
                 const pattern = attentionData[headName];
-                const thumbSize = Math.min(pattern.length, 40);
+                const thumbSize = Math.min(pattern.length, 60);
                 thumb.style.gridTemplateColumns = `repeat(${{thumbSize}}, 2px)`;
                 
                 for (let i = 0; i < thumbSize; i++) {{
@@ -909,7 +909,7 @@ def interactive_training_viewer(history: dict, max_snapshots: int = 200, attn_re
     
     <div class="tv-container-{viewer_id}">
         <div class="tv-header-{viewer_id}">
-            <div class="tv-title-{viewer_id}">Training A 2-Layer Transformer On Repeating Token Sequences</div>
+            <div class="tv-title-{viewer_id}">Training A 2-Layer Transformer On Repeating Token Sequences Of Varying Lengths</div>
         </div>
         
         <div class="tv-controls-{viewer_id}">
