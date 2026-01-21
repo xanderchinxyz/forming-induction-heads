@@ -1,5 +1,7 @@
 ## **README:**
 
+https://github.com/user-attachments/assets/671ad83a-4308-4792-8ec5-8bc85aef067a
+
 The goal of this project is to observe induction heads, which are circuits that allow models to perform in-context learning by searching for previous occurrences of a sequence to predict the token that followed. To do this, I trained small, attention-only transformers on the task of repeating a sequence of random tokens with varying lengths up to the specified max context. Because the sequence length varies, the model can't cheat by memorizing a pattern; it must develop a circuit that looks at the current token, finds its previous occurrence, and predicts the token that follows it.
 
 I trained four variations of attention-only models with absolute positional encodings to see how depth and data variety affect the formation of these circuits. Each epoch consisted of procedurally generating a batch of repeated sequences (shape: [batch_size, max_context_length]). While sequence lengths were chosen randomly between epochs for the 'varied' models, all sequences within a single batch shared a uniform length.
