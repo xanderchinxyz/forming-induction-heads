@@ -1163,7 +1163,7 @@ def interactive_training_viewer(history: dict, max_snapshots: int = 200, attn_re
             
             const title = document.createElement('div');
             title.className = 'tv-layer-title-' + viewerId;
-            title.textContent = `Layer ${{layer}} attention (seq_len=20)`;
+            title.textContent = `Layer ${{layer}} Attention Heads (seq_len=20)`;
             container.appendChild(title);
             
             const grid = document.createElement('div');
