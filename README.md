@@ -1,7 +1,8 @@
-## **README:**
+# Forming Induction Heads
 
 https://github.com/user-attachments/assets/671ad83a-4308-4792-8ec5-8bc85aef067a
 
+## Preface
 The goal of this project is to observe induction heads, which are circuits that allow models to perform in-context learning by searching for previous occurrences of a sequence to predict the token that followed. To do this, I trained small, attention-only transformers on the task of repeating a sequence of random tokens with varying lengths up to the specified max context. Because the sequence length varies, the model can't cheat by memorizing a pattern; it must develop a circuit that looks at the current token, finds its previous occurrence, and predicts the token that follows it.
 
 I trained four variations of attention-only models with absolute positional encodings to see how depth and data variety affect the formation of these circuits. Each epoch consisted of procedurally generating a batch of repeated sequences (shape: [batch_size, max_context_length]). While sequence lengths were chosen randomly between epochs for the 'varied' models, all sequences within a single batch shared a uniform length.
@@ -23,7 +24,7 @@ Fixed variables:
 - Batch size: 32
 - Optimizer: AdamW with learning rate 0.001, betas (0.9, 0.98), weight decay 0.01
 
-### Rough Findings:
+## Rough Findings:
 - 1L and 2L fixed models unsurprisingly seem to have memorized the sequence length of 20, as both show fixed induction heads diagonals with intervals of 20, no matter what the sequence length is, and hence the induction accuracy (accuracy of the model after one repeated sequence) of sequences of other lengths is 0%
 - The 2L fixed model seems to have developed an almost "artificial" looking blur in the heads of layer 0 after the 20th token position
 - I asked Gemini about this and it mentioned that this blur could be due to the formation of a previous token head, where layer 0 acts as a helper to move information around so that layer 1 can perform the match
@@ -48,7 +49,7 @@ Fixed variables:
 
 - Interestingly, the attention head L0H2 seems to transition from an attention head that looks at the previous token (a nice, clear long diagonal offset by one) to an attention head that looks like pure noise, similar to the attention heads when they were first initialized after 20000 epochs. OOD induction accuracy also starts to drop when these attention heads start fading into noise. Perhaps this head could be related to the model memorizing!
 
-### Conclusion:
+## Conclusion:
 This was a very informal but fun and informative project! I would like to look more into why exactly certain patterns are formed and break down what the model is doing further, but that's out of scope for now, as this was meant to be a fun little experiment to see the formation of induction heads on 1-layer and 2-layer attention-only transformers.
 
 Attention head viewer design inspiration credited to the [TransformerLens](https://github.com/TransformerLensOrg/TransformerLens) library created by [Neel Nanda](https://www.neelnanda.io/).
