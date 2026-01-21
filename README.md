@@ -40,3 +40,5 @@ Fixed variables:
 
 ### Conclusion:
 This was a very informal but fun and informative project! I would like to look more into why exactly certain patterns are formed and break down what the model is doing further, but that's out of scope for now, as this was meant to be a fun little experiment to see the formation of induction heads on 1-layer and 2-layer attention-only transformers.
+
+Attention head viewer design inspiration credited to the [TransformerLens](https://github.com/TransformerLensOrg/TransformerLens) library created by [Neel Nanda](https://www.neelnanda.io/).
