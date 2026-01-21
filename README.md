@@ -26,8 +26,8 @@ Fixed variables:
 - The 2L fixed model seems to have developed an almost "artificial" looking blur in the heads of layer 0 after the 20th token position
 - I asked Gemini about this and it mentioned that this blur could be due to the formation of a previous token head, where layer 0 acts as a helper to move information around so that layer 1 can perform the match
 <p align="center">
-  <img src="./assets/1L_fixed.jpg" width="45%" />
-  <img src="./assets/2L_fixed.jpg" width="45%" />
+  <img src="./assets/1L_fixed.jpg" width="48%" />
+  <img src="./assets/2L_fixed.jpg" width="48%" />
 </p>
 
 - 1L varied couldn't form induction heads since information or tokens can't "mix" using only one layer
