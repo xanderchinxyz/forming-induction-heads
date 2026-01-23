@@ -48,6 +48,7 @@ Fixed variables:
 <img src="./assets/2L_varied_60000.jpg">
 
 - Interestingly, the attention head L0H2 seems to transition from an attention head that looks at the previous token (a nice, clear long diagonal offset by one) to an attention head that looks like pure noise after 20000 epochs, similar to the attention heads when they were first initialized. OOD induction accuracy also starts to drop when this attention head starts fading into noise. Perhaps this head could be related to the model memorizing!
+
 https://github.com/user-attachments/assets/beef2b00-0477-4f64-b00b-30b34d50adbb
 
 ## Conclusion
